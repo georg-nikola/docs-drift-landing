@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>docs-drift - Keep your documentation in sync with your code</title>
+    <meta name="description" content="CLI tool and GitHub Action that detects documentation drift by validating code examples in Markdown files. Fast, deterministic, simple, and private.">
+    <meta name="keywords" content="documentation, drift detection, markdown, code validation, CI/CD, GitHub Action, developer tools">
+    <meta name="author" content="Georg Nikola">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs-drift.georg-nikola.com/">
+    <meta property="og:title" content="docs-drift - Keep your documentation in sync with your code">
+    <meta property="og:description" content="CLI tool that detects documentation drift by validating code examples in Markdown files.">
+    <meta property="og:image" content="https://docs-drift.georg-nikola.com/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://docs-drift.georg-nikola.com/">
+    <meta property="twitter:title" content="docs-drift - Keep your documentation in sync with your code">
+    <meta property="twitter:description" content="CLI tool that detects documentation drift by validating code examples in Markdown files.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <svg class="nav-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <path d="M12 18v-6"/>
+                    <path d="m9 15 3 3 3-3"/>
+                </svg>
+                <span>docs-drift</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#installation" class="nav-link">Install</a>
+                <a href="#usage" class="nav-link">Usage</a>
+                <a href="https://github.com/georg-nikola/docs-drift" class="nav-link nav-link-github" target="_blank" rel="noopener">
+                    <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <a href="https://github.com/georg-nikola/docs-drift" target="_blank" rel="noopener" id="github-stars-badge">
+                    <img src="https://img.shields.io/github/stars/georg-nikola/docs-drift?style=social" alt="GitHub stars" loading="lazy">
+                </a>
+            </div>
+            <h1 class="hero-title">
+                Keep your documentation<br>
+                <span class="hero-title-gradient">in sync with your code</span>
+            </h1>
+            <p class="hero-description">
+                CLI tool and GitHub Action that detects documentation drift by validating
+                code examples in Markdown files. Fails CI when docs break.
+            </p>
+            <div class="hero-cta">
+                <a href="#installation" class="btn btn-primary">
+                    Get Started
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/georg-nikola/docs-drift" class="btn btn-secondary" target="_blank" rel="noopener">
+                    <svg class="btn-icon-left" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    View on GitHub
+                </a>
+            </div>
+
+            <!-- Terminal Demo -->
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="terminal-button terminal-button-red"></span>
+                        <span class="terminal-button terminal-button-yellow"></span>
+                        <span class="terminal-button terminal-button-green"></span>
+                    </div>
+                    <span class="terminal-title">Terminal</span>
+                </div>
+                <div class="terminal-body">
+                    <pre><code><span class="terminal-prompt">$</span> docs-drift check
+
+<span class="terminal-success">Checking documentation...</span>
+
+README.md
+  <span class="terminal-success">Line 42: javascript code block - passed</span>
+  <span class="terminal-error">Line 78: python code block - failed</span>
+    <span class="terminal-dim">-> NameError: name 'undefined_var' is not defined</span>
+
+<span class="terminal-error">Docs Drift Detected</span>
+Summary: <span class="terminal-error">1 failed</span>, <span class="terminal-success">1 passed</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why docs-drift?</h2>
+            <p class="section-description">
+                Documentation gets out of sync with code. Code examples in README files break silently.
+                Users copy-paste examples that no longer work. docs-drift validates that code examples
+                in your documentation actually run without errors.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-fast">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Fast</h3>
+                    <p class="feature-description">
+                        Local execution with no network calls. Parallel processing for large documentation sets.
+                        Changed-only mode for instant CI feedback.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-deterministic">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Deterministic</h3>
+                    <p class="feature-description">
+                        Same input always produces the same output. No flaky tests, no random failures.
+                        Reliable results you can trust in CI/CD.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-simple">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <path d="m9 9 6 6"/>
+                            <path d="m15 9-6 6"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Simple</h3>
+                    <p class="feature-description">
+                        Single binary with no runtime dependencies. Zero configuration to get started.
+                        YAML config file when you need it.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon feature-icon-private">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Private</h3>
+                    <p class="feature-description">
+                        No SaaS, no telemetry, no data collection. Your code stays on your machine.
+                        100% open source under MIT license.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="installation" class="installation">
+        <div class="container">
+            <h2 class="section-title">Installation</h2>
+            <p class="section-description">
+                Get started with docs-drift in seconds. Choose your preferred installation method.
+            </p>
+
+            <div class="install-tabs">
+                <button class="install-tab active" data-tab="go">Go Install</button>
+                <button class="install-tab" data-tab="source">From Source</button>
+                <button class="install-tab" data-tab="action">GitHub Action</button>
+            </div>
+
+            <div class="install-content">
+                <div class="install-panel active" id="panel-go">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Install via Go</span>
+                            <button class="copy-btn" data-code="go install github.com/georg-nikola/docs-drift/cmd/docs-drift@latest">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>go install github.com/georg-nikola/docs-drift/cmd/docs-drift@latest</code></pre>
+                    </div>
+                </div>
+
+                <div class="install-panel" id="panel-source">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>Build from source</span>
+                            <button class="copy-btn" data-code="git clone https://github.com/georg-nikola/docs-drift.git
+cd docs-drift
+go build -o docs-drift ./cmd/docs-drift">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>git clone https://github.com/georg-nikola/docs-drift.git
+cd docs-drift
+go build -o docs-drift ./cmd/docs-drift</code></pre>
+                    </div>
+                </div>
+
+                <div class="install-panel" id="panel-action">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>.github/workflows/docs-check.yml</span>
+                            <button class="copy-btn" data-code="name: Documentation Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  docs-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: georg-nikola/docs-drift@v0.2
+        with:
+          config: docs-drift.yml
+          changed-only: true
+          parallel: true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                </svg>
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code><span class="code-keyword">name:</span> Documentation Check
+
+<span class="code-keyword">on:</span>
+  <span class="code-keyword">push:</span>
+    <span class="code-keyword">branches:</span> [main]
+  <span class="code-keyword">pull_request:</span>
+    <span class="code-keyword">branches:</span> [main]
+
+<span class="code-keyword">jobs:</span>
+  <span class="code-keyword">docs-drift:</span>
+    <span class="code-keyword">runs-on:</span> ubuntu-latest
+    <span class="code-keyword">steps:</span>
+      - <span class="code-keyword">uses:</span> actions/checkout@v4
+        <span class="code-keyword">with:</span>
+          <span class="code-keyword">fetch-depth:</span> <span class="code-number">0</span>
+
+      - <span class="code-keyword">uses:</span> georg-nikola/docs-drift@v0.2
+        <span class="code-keyword">with:</span>
+          <span class="code-keyword">config:</span> docs-drift.yml
+          <span class="code-keyword">changed-only:</span> <span class="code-boolean">true</span>
+          <span class="code-keyword">parallel:</span> <span class="code-boolean">true</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Section -->
+    <section id="usage" class="usage">
+        <div class="container">
+            <h2 class="section-title">Quick Start</h2>
+            <p class="section-description">
+                Get up and running in two simple steps.
+            </p>
+
+            <div class="usage-steps">
+                <div class="usage-step">
+                    <div class="usage-step-number">1</div>
+                    <div class="usage-step-content">
+                        <h3>Initialize configuration</h3>
+                        <div class="code-block">
+                            <pre><code><span class="terminal-prompt">$</span> docs-drift init
+
+<span class="terminal-success">Created docs-drift.yml</span></code></pre>
+                        </div>
+                        <div class="code-block code-block-config">
+                            <div class="code-header">
+                                <span>docs-drift.yml</span>
+                            </div>
+                            <pre><code><span class="code-keyword">version:</span> <span class="code-number">1</span>
+
+<span class="code-keyword">docs:</span>
+  <span class="code-keyword">paths:</span>
+    - README.md
+    - docs/**/*.md
+
+<span class="code-keyword">checks:</span>
+  <span class="code-keyword">code_blocks:</span>
+    <span class="code-keyword">enabled:</span> <span class="code-boolean">true</span>
+    <span class="code-keyword">languages:</span>
+      - javascript
+      - python
+    <span class="code-keyword">timeout:</span> 30s</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="usage-step">
+                    <div class="usage-step-number">2</div>
+                    <div class="usage-step-content">
+                        <h3>Run the check</h3>
+                        <div class="code-block">
+                            <pre><code><span class="terminal-prompt">$</span> docs-drift check
+
+<span class="terminal-success">Checking documentation...</span>
+
+README.md
+  <span class="terminal-success">Line 25: javascript code block - passed</span>
+  <span class="terminal-success">Line 48: python code block - passed</span>
+
+docs/getting-started.md
+  <span class="terminal-success">Line 12: javascript code block - passed</span>
+
+<span class="terminal-success">No drift detected!</span>
+Summary: <span class="terminal-success">3 passed</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="usage-options">
+                <h3>Advanced Options</h3>
+                <div class="options-grid">
+                    <div class="option-card">
+                        <code>--changed-only</code>
+                        <p>Only check files modified since the last commit. Perfect for fast PR validation.</p>
+                    </div>
+                    <div class="option-card">
+                        <code>--parallel</code>
+                        <p>Enable concurrent execution for 2-4x faster validation on multi-core systems.</p>
+                    </div>
+                    <div class="option-card">
+                        <code>--verbose</code>
+                        <p>Show detailed output including which files are being checked.</p>
+                    </div>
+                    <div class="option-card">
+                        <code>docs-drift:skip</code>
+                        <p>Add to code fence to skip validation of specific blocks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Ready to catch documentation drift?</h2>
+            <p class="cta-description">
+                Stop shipping broken documentation. Start validating your code examples today.
+            </p>
+            <div class="cta-buttons">
+                <a href="https://github.com/georg-nikola/docs-drift" class="btn btn-primary btn-large" target="_blank" rel="noopener">
+                    <svg class="btn-icon-left" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    Get Started on GitHub
+                </a>
+                <a href="https://github.com/georg-nikola/docs-drift/blob/main/README.md" class="btn btn-secondary btn-large" target="_blank" rel="noopener">
+                    Read the Docs
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="/" class="footer-logo">
+                        <svg class="footer-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <path d="M12 18v-6"/>
+                            <path d="m9 15 3 3 3-3"/>
+                        </svg>
+                        <span>docs-drift</span>
+                    </a>
+                    <p class="footer-tagline">Keep your documentation in sync with your code.</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://github.com/georg-nikola/docs-drift" target="_blank" rel="noopener">GitHub</a></li>
+                            <li><a href="https://github.com/georg-nikola/docs-drift/blob/main/README.md" target="_blank" rel="noopener">Documentation</a></li>
+                            <li><a href="https://github.com/georg-nikola/docs-drift/releases" target="_blank" rel="noopener">Releases</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="https://github.com/georg-nikola/docs-drift/issues" target="_blank" rel="noopener">Issues</a></li>
+                            <li><a href="https://github.com/georg-nikola/docs-drift/discussions" target="_blank" rel="noopener">Discussions</a></li>
+                            <li><a href="https://github.com/georg-nikola/docs-drift/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>MIT License. Made with care by <a href="https://github.com/georg-nikola" target="_blank" rel="noopener">Georg Nikola</a>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+apiVersion: v2
+name: docs-drift-landing
+description: A Helm chart for deploying the docs-drift landing page
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - docs-drift
+  - landing-page
+  - static-site
+  - nginx
+  - kubernetes
+  - argocd
+  - gitops
+home: https://github.com/georg-nikola/docs-drift-landing
+sources:
+  - https://github.com/georg-nikola/docs-drift-landing
+  - https://github.com/georg-nikola/docs-drift
+maintainers:
+  - name: Georg Nikola
+    email: dev@georg-nikola.com

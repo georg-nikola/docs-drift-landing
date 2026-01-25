@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+*.md
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# CI/CD
+.github
+
+# Kubernetes/Helm
+helm/
+*.yaml
+!nginx.conf
+
+# Test files
+tests/
+playwright.config.*
+playwright-report/
+test-results/
+
+# Build artifacts
+node_modules/
+dist/
+out/

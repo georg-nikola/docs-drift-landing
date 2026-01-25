@@ -1,0 +1,33 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Node.js (if using npm for any tooling)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Test output
+playwright-report/
+test-results/
+coverage/
+
+# Build artifacts
+dist/
+out/
+build/
+
+# Docker
+*.tar
+
+# Temporary files
+*.tmp
+*.temp
+*.log
