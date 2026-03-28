@@ -17,9 +17,24 @@ spec:
     {{- range .Values.ingress.hosts }}
     - match: Host(`{{ .host }}`)
       kind: Rule
+      {{- with $.Values.ingress.middlewares }}
+      middlewares:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       services:
         - name: {{ include "docs-drift-landing.fullname" $ }}
           port: {{ $.Values.service.port }}
+    {{- end }}
+    {{- if .Values.ingress.authentikOutpost }}
+    {{- range .Values.ingress.hosts }}
+    - match: Host(`{{ .host }}`) && PathPrefix(`/outpost.goauthentik.io/`)
+      kind: Rule
+      priority: 15
+      services:
+        - name: authentik-server
+          namespace: authentik
+          port: 80
+    {{- end }}
     {{- end }}
   {{- with .Values.ingress.tls }}
   tls:

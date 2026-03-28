@@ -51,6 +51,8 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
+  middlewares: []
+  authentikOutpost: false
   tls: []
 
 resources:
