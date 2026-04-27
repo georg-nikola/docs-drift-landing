@@ -1,5 +1,5 @@
 # Build stage - minimal, just for validation
-FROM alpine:3.19 AS validator
+FROM alpine:3.23 AS validator
 
 # Copy source files for validation
 COPY index.html /validate/
