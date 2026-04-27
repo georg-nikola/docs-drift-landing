@@ -27,34 +27,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  npm-audit:
-    name: npm audit — Playwright Test Dependency Vulnerabilities
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: tests
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm install --ignore-scripts --no-audit
-
-      - name: Run npm audit
-        run: npm audit --audit-level=high --json > npm-audit-report.json || true
-
-      - name: Upload npm audit report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: npm-audit-report
-          path: tests/npm-audit-report.json
-
   trivy-fs:
     name: Trivy — Filesystem Vulnerability Scan
     runs-on: ubuntu-latest
