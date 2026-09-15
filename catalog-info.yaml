@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: docs-drift-landing
+  annotations:
+    github.com/project-slug: georg-nikola/docs-drift-landing
+    backstage.io/kubernetes-namespace: default
+    backstage.io/kubernetes-label-selector: app.kubernetes.io/instance=docs-drift-landing
+    argocd/app-name: docs-drift-landing
+spec:
+  type: website
+  lifecycle: production
+  owner: platform
+  system: home-cluster
