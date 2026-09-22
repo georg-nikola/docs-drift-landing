@@ -24,6 +24,9 @@ dist/
 out/
 build/
 
+# Wrangler local state
+.wrangler/
+
 # Docker
 *.tar
 

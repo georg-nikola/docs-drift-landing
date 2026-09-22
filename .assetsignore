@@ -1,0 +1,13 @@
+Dockerfile
+.dockerignore
+nginx.conf
+README.md
+LICENSE
+catalog-info.yaml
+wrangler.jsonc
+.assetsignore
+.gitignore
+.git
+.github
+helm
+.wrangler
