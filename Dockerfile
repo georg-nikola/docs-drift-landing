@@ -12,7 +12,7 @@ RUN test -s /validate/index.html && \
     test -s /validate/script.js
 
 # Production stage
-FROM nginx:1.25-alpine
+FROM nginx:1.31-alpine
 
 # Security: Create non-root user
 RUN addgroup -g 101 -S nginx || true && \
